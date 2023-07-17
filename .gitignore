@@ -1,0 +1,22 @@
+result.txt
+test_results/
+*.pyc
+*.pth
+.DS_Store
+g-research-crypto-forecasting/
+Datasets/CustomData/Binance Coin.csv
+Datasets/CustomData/Bitcoin Cash.csv
+Datasets/CustomData/Cardano.csv
+Datasets/CustomData/Dogecoin.csv
+Datasets/CustomData/EOS.IO.csv
+Datasets/CustomData/Ethereum Classic.csv
+Datasets/CustomData/Ethereum.csv
+Datasets/CustomData/IOTA.csv
+Datasets/CustomData/Litecoin.csv
+Datasets/CustomData/Maker.csv
+Datasets/CustomData/Monero.csv
+Datasets/CustomData/Stellar.csv
+Datasets/CustomData/TRON.csv
+Datasets/CustomData/asset_details.csv
+Datasets/CustomData/kaggle.json
+Datasets/CustomData/train.csv

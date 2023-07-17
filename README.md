@@ -18,34 +18,56 @@ minutes and 1 hour) denoted with 'm' and 'h'. Thus, in total we have 4 ETT datas
 
 Another popular dataset from [kaggle](https://www.kaggle.com/competitions/g-research-crypto-forecasting/data) is used to Evalute the five selected models on it. This dataset contains historical trading data for multiple cryptocurrencies such as Bitcoin and Ethereum. Timestamps are represented in minutes and correspond to ID numbers which map to specific cryptocurrencies. Columns include the total number of trades, open, high, low and close prices, trade volume, volume weighted average price, and target residual log-returns over a 15 minute period.
 
+---
 ## Solution Approach
 
-(1) Replicate linear models (Dlinear, Nlinear) and transformer models (FEDFormer, Informer, and PatchTST) based on the papers' official repository and pipelines. This ensures accurate reproduction of the models.
-(2) Train four historical dataset ([ETDataset](https://github.com/zhouhaoyi/ETDataset.git)) on the five replicated models.
-(3) Select a time series dataset from [Kaggle](https://www.kaggle.com/competitions/g-research-crypto-forecasting/data?select=train.csv). Make some Exploartion and preprocessing on the whole dataset and then apply ARIMA model on one of the cryptoassets (`Datasets/CustomDatsets/Bitcoin.csv`).
-(4) Train the selected dataset (`Bitcoin.csv`) on the three models,Dlinear, Informer , and PatchTST.
-(5) Evaluate the trained models on the held-out test set. Compare their performances in:
+**(1)** Replicate linear models (Dlinear, Nlinear) and transformer models (FEDFormer, Informer, and PatchTST) based on the papers' official repository and pipelines. This ensures accurate reproduction of the models.
+
+**(2)** Train four historical dataset ([ETDataset](https://github.com/zhouhaoyi/ETDataset.git)) on the five replicated models.
+
+**(3)** Select a time series dataset from [Kaggle](https://www.kaggle.com/competitions/g-research-crypto-forecasting/data?select=train.csv). Make some Exploartion and preprocessing on the whole dataset and then apply ARIMA model on one of the cryptoassets (`Datasets/CustomDatsets/Bitcoin.csv`).
+
+**(4)** Train the selected dataset (`Bitcoin.csv`) on the three models,Dlinear, Informer , and PatchTST.
+
+**(5)** Evaluate the trained models on the held-out test set. Compare their performances in:
 
 - Quantitative metrics (e.g. MSE, MAE)
 - Long-term forecasting ability (predictions at further time steps T)
 - Computational efficiency
 
-(6) Analyze the results qualitatively:
+**(6)** Analyze the results qualitatively:
 
 - Determine if/when the transformer model outperforms the linear model
 - Understand the strengths and weaknesses of each approach
 - Identify scenarios where one approach is preferred over the other
 
+---
+## Prepocessing Datasets
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+The data preprocessing steps mentioned in (Zeng, 2023) include normalization with zero-mean, and seasonal-trend decomposition. Autoformer first applies seasonal-trend decomposition behind each neural block, which is a standard method in time series analysis to make raw data more predictable. Specifically, they use a moving average kernel on the input sequence to extract the trend-cyclical component of the time series. The difference between the original sequence and the trend component is regarded as the seasonal component. 
+
+## BaseLine Models
+
+NLinear and DLinear are simple linear models with normalization, while Informer, FEDformer and PatchTST are more complex attention-based models that use Transformer architectures for time series forecasting.
+
+- **NLinear:** NLinear first subtracts the input by the last value of the sequence. Then, the input goes through a linear layer, and the subtracted part is added back before making the final prediction. The subtraction and addition in NLinear are a simple normalization for the input sequence.
+
+- **DLinear:** A combination of a Decomposition scheme used in Autoformer and FEDformer with linear layers. It first decomposes a raw data input into a trend component by a moving average kernel and a remainder (seasonal) component. Then, two one-layer linear layers are applied to each component and we sum up the two features to get the final prediction. By explicitly handling trend, DLinear enhances the performance of a vanilla linear when there is a clear trend in the data.
+
+## Former Models
+
+<!-- - **Informer:** An attention-based model for time series forecasting proposed in 2019. It uses a Transformer encoder-decoder architecture with causal self-attention and cross attention.
+
+- **FEDformer:** An improvement on Informer proposed in 2021. It uses feature-wise decomposition which decomposes the input into different features before feeding them into separate transformers. This helps capture different patterns in the data.
+
+- **PatchTST:** -->
 
 ---
-
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
 
-#### **Prerequisites**
+### **Prerequisites**
 
 First, please make sure you have installed Conda. Then, our environment can be installed by:
 
@@ -59,89 +81,90 @@ First, please make sure you have installed Conda. Then, our environment can be i
 > Run each notebook speratly and thats it.
 
 ---
-
 ## Directories Description
 
-- `Datasets`: This directory contains the datasets used in the project, 4 `ETDatasets` and `Bitcoin` dataset.
-- `exp`: This directory contains files related to experiments conducted during the project to train the five selected models.
-    - `exp_Informer.py`: contain the train , validation, testing (with visualization) , and prediction of the Informer model.
-    - `exp_FEDFormer.py`: contain the train , validation, testing (with visualization), and prediction of the FEDFormer model.
-    - `exp_PatchTST.py`: contain the train , validation, testing (with visualization), and prediction of the PatchTST model.
-    - `exp_Dlinear.py`: contain the train , validation, testing (with visualization), and prediction of the Dlinear model.
-    - `exp_Nlinear.py`: contain the train , validation, testing (with visualization), and prediction of the Nlinear model.
-- `models`: This directory contains the source code for the model architecture used in the project for all the five selected models.
-- `layers`: This directory contains the source code for the layers used in all the models.
-- `utils`: This directory contains utility functions used throughout the project, such as data preprocessing functions, evaluation metrics, and visualization functions.
-- `prepare_data`: This directory contains scripts that preprocess the raw data and convert it into a format suitable for training.
-- `Checkpoints`: This directory contains saved model checkpoints that can be loaded for further training, testing or inference.
-- `results`: This directory contains any output files generated during the project prediction results in Numpy format (.npy).
-- `test_results`: This directory contains the visualization graphs of model testing in PDF format.
-- `Images`: This directory contain any images used in the project in markdown or in README files.
+<!-- - **`Datasets`:** This directory contains the datasets used in the project, 4 `ETDatasets` and `Bitcoin` dataset.
+- **`exp`:** This directory contains files related to experiments conducted during the project to train the five selected models.
+    - `exp_Informer.py`: Contains the train , validation, testing (with visualization) , and prediction of the Informer model.
+    - `exp_FEDFormer.py`: Contains the train , validation, testing (with visualization), and prediction of the FEDFormer model.
+    - `exp_PatchTST.py`: Contains the train , validation, testing (with visualization), and prediction of the PatchTST model.
+    - `exp_Dlinear.py`: Contains the train , validation, testing (with visualization), and prediction of the Dlinear model.
+    - `exp_Nlinear.py`: Contains the train , validation, testing (with visualization), and prediction of the Nlinear model.
+- **`models`:** This directory contains the source code for the model architecture used in the project for all the five selected models.
+- **`layers`:** This directory contains the source code for the layers used in all the models.
+- **`utils`:** This directory contains utility functions used throughout the project, such as data preprocessing functions, evaluation metrics, and visualization functions.
+- **`prepare_data`:** This directory contains scripts that preprocess the raw data and convert it into a format suitable for training.
+- **`Checkpoints`:** This directory contains saved model checkpoints that can be loaded for further training, testing or inference.
+- **`results`:** This directory contains any output files generated during the project prediction results in Numpy format (.npy).
+- **`test_results`:** This directory contains the visualization graphs of model testing in PDF format.
+- **`Images`:** This directory contain any images used in the project in markdown or in README files. -->
+
+| Directory | Description |
+|---|---|
+| **Datasets** | This directory contains the datasets used in the project, 4 `ETDatasets` and `Bitcoin` dataset. |
+| **exp** | This directory contains files related to experiments conducted during the project to train the five selected models. |
+    * `exp_Informer.py`: Contains the train, validation, testing (with visualization), and prediction of the Informer model.
+    * `exp_FEDFormer.py`: Contains the train, validation, testing (with visualization), and prediction of the FEDFormer model.
+    * `exp_PatchTST.py`: Contains the train, validation, testing (with visualization), and prediction of the PatchTST model.
+    * `exp_Dlinear.py`: Contains the train, validation, testing (with visualization), and prediction of the Dlinear model.
+    * `exp_Nlinear.py`: Contains the train, validation, testing (with visualization), and prediction of the Nlinear model.
+| **models** | This directory contains the source code for the model architecture used in the project for all the five selected models. |
+| **layers** | This directory contains the source code for the layers used in all the models. |
+| **utils** | This directory contains utility functions used throughout the project, such as data preprocessing functions, evaluation metrics, and visualization functions. |
+| **prepare_data** | This directory contains scripts that preprocess the raw data and convert it into a format suitable for training. |
+| **Checkpoints** | This directory contains saved model checkpoints that can be loaded for further training, testing or inference. |
+| **results** | This directory contains any output files generated during the project prediction results in Numpy format (.npy). |
+| **test_results** | This directory contains the visualization graphs of model testing in PDF format. |
+| **Images** | This directory contain any images used in the project in markdown or in README files. |
 
 
-## Hyperparamers 
-
-
+---
 ## Results
-The results of the project are saved in the `test_results` directory. The results include the quantitative metrics (MSE, MAE), the long-term forecasting ability, and the computational efficiency of the models.
+<!-- The results of the project are saved in the `test_results` directory. The results include the quantitative metrics (MSE, MAE), the long-term forecasting ability, and the computational efficiency of the models. -->
 
 ---
-
 ## Analysis
-The results of the project show that transformer models can outperform linear models in some cases, but the performance of both types of models depends on the specific dataset. For example, transformer models performed better than linear models on the Bitcoin dataset, but linear models performed better on the S&P 500 dataset.
+<!-- The results of the project show that transformer models can outperform linear models in some cases, but the performance of both types of models depends on the specific dataset. For example, transformer models performed better than linear models on the Bitcoin dataset, but linear models performed better on the S&P 500 dataset.
 
-The analysis of the results also shows that the strengths and weaknesses of linear and transformer models differ. Linear models are typically more computationally efficient, but they may not be able to capture long-term trends in the data. Transformer models are more complex, but they can capture long-term trends and make more accurate predictions.
+The analysis of the results also shows that the strengths and weaknesses of linear and transformer models differ. Linear models are typically more computationally efficient, but they may not be able to capture long-term trends in the data. Transformer models are more complex, but they can capture long-term trends and make more accurate predictions. -->
 
 ---
-
 ## Conclusion
-The project shows that both linear and transformer models can be effective for time series forecasting. The choice of which type of model to use depends on the specific dataset and the desired trade-off between accuracy and computational efficiency.
+<!-- The project shows that both linear and transformer models can be effective for time series forecasting. The choice of which type of model to use depends on the specific dataset and the desired trade-off between accuracy and computational efficiency. -->
 
 
-
+---
 ## Citation
 If you find this repository useful in your research, please consider citing the following papers:
-<!-- 
-
 
 ```
-@article{PatchTST-2022,
-  authors    = {Yuqi Nie,
-               Nam H. Nguyen,
-               Phanwadee Sinthong,
-               Jayant Kalagnanam
-               },
-  title     = {A time series is worth 64 words: Long-term forecasting with transformers},
-  journal   = {arXiv preprint arXiv:2211.14730},
-  year      = {2022},
+@inproceedings{zeng2023transformers,
+  title={Are transformers effective for time series forecasting?},
+  author={Zeng, Ailing and Chen, Muxi and Zhang, Lei and Xu, Qiang},
+  booktitle={Proceedings of the AAAI conference on artificial intelligence},
+  volume={37},
+  number={9},
+  pages={11121--11128},
+  year={2023}
 }
-```
-```
-@article{transformers-informer-2023,
-  authors    = {Haoyi Zhou and
-               Jianxin Li and
-               Shanghang Zhang and
-               Shuai Zhang and
-               Mengyi Yan and
-               Hui Xiong},
-  title     = {Are Transformers Effective for Time Series Forecasting?},
-  journal   = {arXiv preprint arXiv:2205.13504},
-  year      = {2023},
+
+
+@inproceedings{zhou2021informer,
+  title={Informer: Beyond efficient transformer for long sequence time-series forecasting},
+  author={Zhou, Haoyi and Zhang, Shanghang and Peng, Jieqi and Zhang, Shuai and Li, Jianxin and Xiong, Hui and Zhang, Wancai},
+  booktitle={Proceedings of the AAAI conference on artificial intelligence},
+  volume={35},
+  number={12},
+  pages={11106--11115},
+  year={2021}
 }
-```
-```
-@inproceedings{haoyietal-informer-2023,
-  authors    = {Ailing Zeng,
-                 Muxi Chen,
-                 Lei Zhang,
-                 Qiang Xu},
-  title     = {Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting},
-  booktitle = {The Thirty-Fifth {AAAI} Conference on Artificial Intelligence, {AAAI} 2021, Virtual Conference},
-  volume    = {35},
-  number    = {12},
-  pages     = {11106--11115},
-  publisher = {{AAAI} Press},
-  year      = {2021},
+
+
+@article{nie2022time,
+  title={A time series is worth 64 words: Long-term forecasting with transformers},
+  author={Nie, Yuqi and Nguyen, Nam H and Sinthong, Phanwadee and Kalagnanam, Jayant},
+  journal={arXiv preprint arXiv:2211.14730},
+  year={2022}
 }
+
 ```
- -->
