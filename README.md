@@ -71,44 +71,20 @@ To get a local copy up and running follow these simple example steps.
 
 First, please make sure you have installed Conda. Then, our environment can be installed by:
 
-
-* npm
   ```sh
     conda create -n group3_env python=3.9.16
     conda activate group3_env
     pip install -r requirements.txt
   ```
-> Run each notebook speratly and thats it.
+> Run each notebook speratly.
 
 ---
 ## Directories Description
 
-<!-- - **`Datasets`:** This directory contains the datasets used in the project, 4 `ETDatasets` and `Bitcoin` dataset.
-- **`exp`:** This directory contains files related to experiments conducted during the project to train the five selected models.
-    - `exp_Informer.py`: Contains the train , validation, testing (with visualization) , and prediction of the Informer model.
-    - `exp_FEDFormer.py`: Contains the train , validation, testing (with visualization), and prediction of the FEDFormer model.
-    - `exp_PatchTST.py`: Contains the train , validation, testing (with visualization), and prediction of the PatchTST model.
-    - `exp_Dlinear.py`: Contains the train , validation, testing (with visualization), and prediction of the Dlinear model.
-    - `exp_Nlinear.py`: Contains the train , validation, testing (with visualization), and prediction of the Nlinear model.
-- **`models`:** This directory contains the source code for the model architecture used in the project for all the five selected models.
-- **`layers`:** This directory contains the source code for the layers used in all the models.
-- **`utils`:** This directory contains utility functions used throughout the project, such as data preprocessing functions, evaluation metrics, and visualization functions.
-- **`prepare_data`:** This directory contains scripts that preprocess the raw data and convert it into a format suitable for training.
-- **`Checkpoints`:** This directory contains saved model checkpoints that can be loaded for further training, testing or inference.
-- **`results`:** This directory contains any output files generated during the project prediction results in Numpy format (.npy).
-- **`test_results`:** This directory contains the visualization graphs of model testing in PDF format.
-- **`Images`:** This directory contain any images used in the project in markdown or in README files. -->
-
 | Directory | Description |
 |---|---|
 | **Datasets** | This directory contains the datasets used in the project, 4 `ETDatasets` and `Bitcoin` dataset. |
-| **exp** | This directory contains files related to experiments conducted during the project to train the five selected models. 
-    * `exp_Informer.py`: Contains the train, validation, testing (with visualization), and prediction of the Informer model.
-    * `exp_FEDFormer.py`: Contains the train, validation, testing (with visualization), and prediction of the FEDFormer model.
-    * `exp_PatchTST.py`: Contains the train, validation, testing (with visualization), and prediction of the PatchTST model.
-    * `exp_Dlinear.py`: Contains the train, validation, testing (with visualization), and prediction of the Dlinear model.
-    * `exp_Nlinear.py`: Contains the train, validation, testing (with visualization), and prediction of the Nlinear model. |
-    
+| **exp** | This directory contains files related to experiments conducted during the project to train the five selected models. |
 | **models** | This directory contains the source code for the model architecture used in the project for all the five selected models. |
 | **layers** | This directory contains the source code for the layers used in all the models. |
 | **utils** | This directory contains utility functions used throughout the project, such as data preprocessing functions, evaluation metrics, and visualization functions. |
@@ -118,6 +94,33 @@ First, please make sure you have installed Conda. Then, our environment can be i
 | **test_results** | This directory contains the visualization graphs of model testing in PDF format. |
 | **Images** | This directory contain any images used in the project in markdown or in README files. |
 
+* `exp_Informer.py`: Contains the train, validation, testing (with visualization), and prediction of the Informer model.
+* `exp_FEDFormer.py`: Contains the train, validation, testing (with visualization), and prediction of the FEDFormer model.
+* `exp_PatchTST.py`: Contains the train, validation, testing (with visualization), and prediction of the PatchTST model.
+* `exp_Dlinear.py`: Contains the train, validation, testing (with visualization), and prediction of the Dlinear model.
+* `exp_Nlinear.py`: Contains the train, validation, testing (with visualization), and prediction of the Nlinear model. 
+
+## Notebooks Description
+
+- **Training-DLinear-on-ETT-datasets.ipynb**:
+This notebook provide a step-by-step guide for replicating the **DLinear** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
+
+- **Training-NLinear-on-ETT-datasets.ipynb**:
+This notebook provide a step-by-step guide for replicating the **NLinear** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
+
+- **Training-Informer-on-ETT-datasets.ipynb**:
+This notebook provide a step-by-step guide for replicating the **Informer** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
+
+- **Training-FEDformer-on-ETT-datasets.ipynb**:
+This notebook provide a step-by-step guide for replicating the **FEDformer** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
+- **Training-PatchTST-on-ETT-datasets.ipynb**:
+This notebook provide a step-by-step guide for replicating the **PatchTST** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
+
+- **Training-five-models-on-Bitcoin.ipynb**
+This notebook replicate five different models on the Bitcoin cryptocurrency dataset. The models are DLinear, NLinear, Informer, FEDformer, and PatchTST on `Bitcoin` datset explored in `Crypto-Forecasting-EDA-Testing-on-5models` notebook. For each model we will use four diffrent combination of hyperparameters. The main foucs here is to study the *impact of number of prediction length on the performance*. 
+
+- **Crypto-Forecasting-EDA-Testing-on-5models.ipynb**
+This notebook use historical cryptocurrency trading data with the aim of building time series forecasting models. General exploratory data analysis is performed to gain an overview of the full dataset and prepare the data for modeling. Specific preprocessing and analysis is then done on the Bitcoin subset of the data to characterize the time series and identify appropriate models. An **ARIMA** model is chosen as the traditional baseline model. Several neural network time series models are then evaluated on the Bitcoin data, including **DLinear**, **NLinear**, **Informer**, **FEDformer** and **PatchTST**, to investigate their performance for forecasting compared to the ARIMA baseline. 
 
 ---
 ## Results
