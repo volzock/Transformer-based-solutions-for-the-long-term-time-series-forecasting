@@ -166,7 +166,7 @@ class Exp_Main(Exp_Basic):
                     loss = criterion(outputs, batch_y)
                     train_loss.append(loss.item())
 
-                if (i + 1) % 100 == 0:
+                if (i + 1) % 500 == 0:
                 
                     print("Epoch: {0}, Iters: {1}".format(epoch + 1, i + 1))
                     print("-"*80)

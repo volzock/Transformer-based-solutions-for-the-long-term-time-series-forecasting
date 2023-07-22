@@ -1,6 +1,8 @@
 from models.NLinear import data_provider
 from models import NLinear
-from models.NLinear import EarlyStopping, adjust_learning_rate, test_params_flop,metric
+from models.NLinear import EarlyStopping, adjust_learning_rate, test_params_flop
+# from utils.tools import EarlyStopping, adjust_learning_rate, Visual, test_params_flop
+from utils.metrics import metric
 from exp.exp_basic import Exp_Basic
 from utils.tools import Visual
 
@@ -167,7 +169,7 @@ class Exp_Main(Exp_Basic):
                     loss = criterion(outputs, batch_y)
                     train_loss.append(loss.item())
 
-                if (i + 1) % 100 == 0:
+                if (i + 1) % 500 == 0:
                 
                     print("Epoch: {0}, Iters: {1}".format(epoch + 1, i + 1))
                     print("-"*80)
@@ -278,7 +280,7 @@ class Exp_Main(Exp_Basic):
                     pd = np.concatenate((input[0, :, -1], pred[0, :, -1]), axis=0)
                     Visual(gt, pd, os.path.join(folder_path, "last_batch.pdf"))
                     
-                if i in [100,200,300]:
+                if i in [100,150,200,300]:
                     input = batch_x.detach().cpu().numpy()
                     gt = np.concatenate((input[0, :, -1], true[0, :, -1]), axis=0)
                     pd = np.concatenate((input[0, :, -1], pred[0, :, -1]), axis=0)

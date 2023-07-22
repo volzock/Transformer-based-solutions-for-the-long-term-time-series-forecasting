@@ -23,11 +23,6 @@ Specifically, the dataset combines short-term periodical patterns, long-term per
 
 We use the `.csv` file format to save the data, a demo of the ETT-small data is illustrated in Figure 3. The first line (8 columns) is the horizontal header and includes "date", "HUFL", "HULL", "MUFL", "MULL", "LUFL", "LULL" and "OT". The detailed meaning of each column name is shown in the Table 1.
 
-<p align="center">
-<img src="./img/ETT%20data%20demo.png" height = "168" alt="" align=center />
-<br><br>
-<b>Figure 3.</b> A demo of the ETT data.
-</p>
 
 | Field | date | HUFL | HULL | MUFL | MULL | LUFL | LULL | OT |
 | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
@@ -37,7 +32,7 @@ We use the `.csv` file format to save the data, a demo of the ETT-small data is 
 
 ## Cryptocurrency:
 
-#### **`train.csv`**
+### **train**
 This dataset contains historical trading data for multiple cryptocurrencies such as Bitcoin and Ethereum. Timestamps are represented in minutes and correspond to ID numbers which map to specific cryptocurrencies. Columns include the total number of trades, open, high, low and close prices, trade volume, volume weighted average price, and target residual log-returns over a 15 minute period.
 
 | Column | Description |
@@ -53,7 +48,7 @@ This dataset contains historical trading data for multiple cryptocurrencies such
 | `VWAP` | The average price of the asset over the time interval, weighted by volume. VWAP is an aggregated form of trade data. |
 | `Target` | This column contains the residual log-returns for the cryptocurrency over a 15-minute horizon. Residual log-returns are a way of measuring the percentage change in the price of an asset over a given time period, relative to some baseline. The Target column in this dataset represents the residual log-returns for a 15-minute period starting from the minute represented by the corresponding timestamp. |
 
-#### **`asset_details.csv`**
+### **asset_details**
 
 Additional information about cryptocurrencies includes:
 
