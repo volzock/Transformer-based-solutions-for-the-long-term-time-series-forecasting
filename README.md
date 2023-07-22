@@ -4,12 +4,14 @@
 ---
 Code based on [LTSF-Linear](https://github.com/cure-lab/LTSF-Linear)
 
+<img width="800" src="Images/WorkFlow.png" alt="Informer Architecture" />
 
 ## Project Overview
 
 For time series containing C variates, give historical data, train the datasets on five diffrent model architechture and then predict future values at T future time steps. The main goal is to further compare a two simple linear model (Dlinear and Nlinear) for time series forecasting with two diffrent transformer-based model (Informer and FEDFromer) with the recently published transformer-based approach (PatchTST). 
 
-Using historical cryptocurrency trading data with the aim of building time series forecasting models. General exploratory data analysis is performed to gain an overview of the full dataset and prepare the data for modeling. Some preprocessing and analysis is then done on the Bitcoin subset of the data to characterize the time series and identify appropriate models. An ARIMA model is chosen as the traditional baseline model. Several neural network time series models are then evaluated on the Bitcoin data, including DLinear, NLinear, Informer, FEDformer and PatchTST, to investigate their performance for forecasting compared to the ARIMA baseline. 
+To Evaluate the model, historical cryptocurrency dataset is utilized with the objective of constructing time series forecasting models. A time series analysis is carried out to extract information from the entire dataset and preprocess the data by incorporating additional features. Subsequently, an ARIMA model is selected as the traditional baseline model. Several neural network time series models, including DLinear, NLinear, Informer, FEDformer, and PatchTST, are then assessed on the data to examine their forecasting performance in comparison to the ARIMA baseline.
+
 
 ---
 ## Datasets
@@ -25,9 +27,9 @@ Another popular dataset from [kaggle](https://www.kaggle.com/competitions/g-rese
 
 **(2)** Train four historical dataset ([ETDataset](https://github.com/zhouhaoyi/ETDataset.git)) on the five replicated models.
 
-**(3)** Select a time series dataset from [Kaggle](https://www.kaggle.com/competitions/g-research-crypto-forecasting/data?select=train.csv). Make some Exploartion and preprocessing on the whole dataset and then apply ARIMA model on one of the cryptoassets (`Datasets/CustomDatsets/Bitcoin.csv`).
+**(3)** Select a time series dataset from [Kaggle](https://www.kaggle.com/competitions/g-research-crypto-forecasting/data?select=train.csv). Make some Exploartion and preprocessing on the whole dataset and then apply ARIMA model on one of the cryptoassets (`Datasets/CustomDatsets/cryptoh1.csv`).
 
-**(4)** Train the selected dataset (`Bitcoin.csv`) on the three models,Dlinear, Informer , and PatchTST.
+**(4)** Train the selected dataset (`cryptoh1.csv`) on the three models,Dlinear, Informer , and PatchTST.
 
 **(5)** Evaluate the trained models on the held-out test set. Compare their performances in:
 
@@ -56,11 +58,11 @@ NLinear and DLinear are simple linear models with normalization, while Informer,
 
 ## Former Models
 
-<!-- - **Informer:** An attention-based model for time series forecasting proposed in 2019. It uses a Transformer encoder-decoder architecture with causal self-attention and cross attention.
+- **Informer:** An attention-based model for time series forecasting proposed in 2019. It uses a Transformer encoder-decoder architecture with causal self-attention and cross attention.
 
 - **FEDformer:** An improvement on Informer proposed in 2021. It uses feature-wise decomposition which decomposes the input into different features before feeding them into separate transformers. This helps capture different patterns in the data.
 
-- **PatchTST:** -->
+- **PatchTST:** It divide the time series data into patches or segments and then use self-attention mechanisms to capture temporal dependencies within each patch. By dividing the time series into smaller segments, PatchTST can effectively process long sequences and better capture complex patterns in the data.
 
 ---
 ## Getting Started
@@ -101,26 +103,18 @@ First, please make sure you have installed Conda. Then, our environment can be i
 * `exp_Nlinear.py`: Contains the train, validation, testing (with visualization), and prediction of the Nlinear model. 
 
 ## Notebooks Description
+For the following 5 notebooks, a step-by-step guide for replicating the the model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
 
-- **Training-DLinear-on-ETT-datasets.ipynb**:
-This notebook provide a step-by-step guide for replicating the **DLinear** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
-
-- **Training-NLinear-on-ETT-datasets.ipynb**:
-This notebook provide a step-by-step guide for replicating the **NLinear** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
-
-- **Training-Informer-on-ETT-datasets.ipynb**:
-This notebook provide a step-by-step guide for replicating the **Informer** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
-
-- **Training-FEDformer-on-ETT-datasets.ipynb**:
-This notebook provide a step-by-step guide for replicating the **FEDformer** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
-- **Training-PatchTST-on-ETT-datasets.ipynb**:
-This notebook provide a step-by-step guide for replicating the **PatchTST** model and training it on the ETDataset (ETTh1, ETTh2, ETTm1, and ETTm2), ensuring accurate reproduction of the models by comparing the notebook results with the official paper results. The main foucs here is to study the *impact of number of prediction length on the performance*. 
-
+- **Training-DLinear-on-ETT-datasets.ipynb**
+- **Training-NLinear-on-ETT-datasets.ipynb**
+- **Training-Informer-on-ETT-datasets.ipynb**
+- **Training-FEDformer-on-ETT-datasets.ipynb**
+- **Training-PatchTST-on-ETT-datasets.ipynb**
 - **Training-five-models-on-Bitcoin.ipynb**
 This notebook replicate five different models on the Bitcoin cryptocurrency dataset. The models are DLinear, NLinear, Informer, FEDformer, and PatchTST on `Bitcoin` datset explored in `Crypto-Forecasting-EDA-Testing-on-5models` notebook. For each model we will use four diffrent combination of hyperparameters. The main foucs here is to study the *impact of number of prediction length on the performance*. 
 
 - **Crypto-Forecasting-EDA-Testing-on-5models.ipynb**
-This notebook use historical cryptocurrency trading data with the aim of building time series forecasting models. General exploratory data analysis is performed to gain an overview of the full dataset and prepare the data for modeling. Specific preprocessing and analysis is then done on the Bitcoin subset of the data to characterize the time series and identify appropriate models. An **ARIMA** model is chosen as the traditional baseline model. Several neural network time series models are then evaluated on the Bitcoin data, including **DLinear**, **NLinear**, **Informer**, **FEDformer** and **PatchTST**, to investigate their performance for forecasting compared to the ARIMA baseline. 
+This notebook use historical cryptocurrency trading data with the aim of building time series forecasting models. General exploratory data analysis is performed to gain an overview of the full dataset and prepare the data for modeling. Specific preprocessing and analysis is then done on the data (cryptoh1) to characterize the time series and identify appropriate models. An **ARIMA** model is chosen as the traditional baseline model. Several neural network time series models are then evaluated on the Bitcoin data, including **DLinear**, **NLinear**, **Informer**, **FEDformer** and **PatchTST**, to investigate their performance for forecasting compared to the ARIMA baseline. 
 
 ---
 ## Results
