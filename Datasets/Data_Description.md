@@ -32,6 +32,8 @@ We use the `.csv` file format to save the data, a demo of the ETT-small data is 
 
 ## Cryptocurrency:
 
+![image](./Images/crypto_cube.png)
+
 ### **train**
 This dataset contains historical trading data for multiple cryptocurrencies such as Bitcoin and Ethereum. Timestamps are represented in minutes and correspond to ID numbers which map to specific cryptocurrencies. Columns include the total number of trades, open, high, low and close prices, trade volume, volume weighted average price, and target residual log-returns over a 15 minute period.
 
