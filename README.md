@@ -4,9 +4,8 @@
 ---
 Code based on [LTSF-Linear](https://github.com/cure-lab/LTSF-Linear)
 
-<!-- <img width="800" src="Images/WorkFlow.png" alt="Informer Architecture" /> -->
-<!-- ![alt text](http://url/to/img.png) -->
-![plot](.Images/WorkFlow.png)
+
+![img](.Images/WorkFlow.png)
 
 ## Project Overview
 
