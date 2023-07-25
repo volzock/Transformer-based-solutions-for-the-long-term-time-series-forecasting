@@ -275,11 +275,11 @@ class Exp_Main(Exp_Basic):
                     pd = np.concatenate((input[0, :, -1], pred[0, :, -1]), axis=0)
                     Visual(gt, pd, os.path.join(folder_path, "last_batch.pdf"))
                     
-                if i in [100,200,300]:
-                    input = batch_x.detach().cpu().numpy()
-                    gt = np.concatenate((input[0, :, -1], true[0, :, -1]), axis=0)
-                    pd = np.concatenate((input[0, :, -1], pred[0, :, -1]), axis=0)
-                    Visual(gt, pd, os.path.join(folder_path, str(i) + '.pdf'))
+#                 if i in [100,200,300]:
+#                     input = batch_x.detach().cpu().numpy()
+#                     gt = np.concatenate((input[0, :, -1], true[0, :, -1]), axis=0)
+#                     pd = np.concatenate((input[0, :, -1], pred[0, :, -1]), axis=0)
+#                     Visual(gt, pd, os.path.join(folder_path, str(i) + '.pdf'))
 
         if self.args.test_flop:
             test_params_flop((batch_x.shape[1],batch_x.shape[2]))
