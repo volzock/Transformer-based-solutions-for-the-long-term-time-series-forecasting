@@ -5,7 +5,7 @@
 Code based on [LTSF-Linear](https://github.com/cure-lab/LTSF-Linear)
 
 
-![img](.Images/WorkFlow.png)
+![img](./Images/WorkFlow.png)
 
 ## Project Overview
 
