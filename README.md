@@ -75,11 +75,12 @@ To get a local copy up and running follow these simple example steps.
 First, please make sure you have installed Conda. Then, our environment can be installed by:
 
   ```sh
-    conda create -n group3_env python=3.9.16
-    conda activate group3_env
+    conda create -n <group3_env> python=3.9
+    conda activate <group3_env>
     pip install -r requirements.txt
   ```
-> Run each notebook speratly.
+> Run each notebook speratly. 
+> You have to run the training notebooks then the rest.
 
 ---
 ## Directories Description
@@ -111,24 +112,18 @@ For the following 5 notebooks, a step-by-step guide for replicating the the mode
 - **Training-Informer-on-ETT-datasets.ipynb**
 - **Training-FEDformer-on-ETT-datasets.ipynb**
 - **Training-PatchTST-on-ETT-datasets.ipynb**
+
 - **Training-five-models-on-cryptoh1.ipynb**
-This notebook replicate five different models on the cryptocurrency dataset. The models are DLinear, NLinear, Informer, FEDformer, and PatchTST on `cryptoh1` datset explored in `Crypto-Forecasting-EDA-Testing-on-5models` notebook. For each model we will use four diffrent combination of hyperparameters. The main foucs here is to study the *impact of number of prediction length on the performance*. 
+This notebook replicate five different models on the cryptocurrency dataset. The models are DLinear, NLinear, Informer, FEDformer, and PatchTST on `crypto_1h` datset explored in `Crypto-Forecasting-EDA-Evaluation-on-5models` notebook. For each model we will use four diffrent combination of hyperparameters. The main foucs here is to study the *impact of number of prediction length on the performance*. 
 
 - **Crypto-Forecasting-EDA-Testing-on-5models.ipynb**
 This notebook use historical cryptocurrency trading data with the aim of building time series forecasting models. General exploratory data analysis is performed to gain an overview of the full dataset and prepare the data for modeling. Specific preprocessing and analysis is then done on the data (cryptoh1) to characterize the time series and identify appropriate models. Several neural network time series models are then evaluated on the data, including **DLinear**, **NLinear**, **Informer**, **FEDformer** and **PatchTST**, to investigate their performance.
----
-## Results
-<!-- The results of the project are saved in the `test_results` directory. The results include the quantitative metrics (MSE, MAE), the long-term forecasting ability, and the computational efficiency of the models. -->
 
+- **Results-visualization.ipynb**
+To conclude our work, this notebook is made to visualize the results for all the 5 models on the 4 benchmark dataset and the cryptocurrancy dataset.
 ---
-## Analysis
-<!-- The results of the project show that transformer models can outperform linear models in some cases, but the performance of both types of models depends on the specific dataset. For example, transformer models performed better than linear models on the Bitcoin dataset, but linear models performed better on the S&P 500 dataset.
 
-The analysis of the results also shows that the strengths and weaknesses of linear and transformer models differ. Linear models are typically more computationally efficient, but they may not be able to capture long-term trends in the data. Transformer models are more complex, but they can capture long-term trends and make more accurate predictions. -->
-
----
-## Conclusion
-<!-- The project shows that both linear and transformer models can be effective for time series forecasting. The choice of which type of model to use depends on the specific dataset and the desired trade-off between accuracy and computational efficiency. -->
+## Conclusion and Discussion
 
 
 ---
