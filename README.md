@@ -13,7 +13,6 @@ For time series containing C variates, give historical data, train the datasets 
 
 To Evaluate the model, historical cryptocurrency dataset is utilized with the objective of constructing time series forecasting models. A time series analysis is carried out to extract information from the entire dataset and preprocess the data by incorporating additional features. Several neural network time series models, including DLinear, NLinear, Informer, FEDformer, and PatchTST, are then assessed on the data to examine their forecasting performance in comparison.
 
-
 ---
 ## Datasets
 We use 4 popular multivariate datasets provided in (Wu et al., 2021) for forecasting and representation learning. ETT7(Electricity Transformer Temperature) datasets are collected from two different electric transformers labeled with 1 and 2, and each of them contains 2 different resolutions (15
@@ -71,20 +70,51 @@ NLinear and DLinear are simple linear models with normalization, while Informer,
 To get a local copy up and running follow these simple example steps.
 
 ### **Prerequisites**
+Here are the prerequisites for getting a local copy up and running for the project:
 
-First, please make sure you have installed Conda. Then, our environment can be installed by:
+1. **Install Conda:** Before starting, ensure that you have Conda installed on your system. 
 
-  ```sh
+2. **Create the Environment:** Create a new Conda environment for the project. You can do this by running the following commands in your terminal or command prompt:
+
+```sh
     conda create -n <group3_env> python=3.9
-    conda activate <group3_env>
-    pip install -r requirements.txt
-  ```
-> Run each notebook speratly. 
-> You have to run the training notebooks then the rest.
+    Replace <group3_env> with the desired name for your environment.
+```
+3. **Activate the Environment**
+
+```sh
+conda activate <group3_env>
+Again, replace <group3_env> with the name of your environment.
+```
+4. **Install Project Dependencies:** With the environment active, install the required libraries and dependencies for the project. This can be done using the following command:
+
+```sh
+pip install -r requirements.txt
+```
+
+5. **Run the Notebooks Separately:** The project likely consists of multiple Jupyter notebooks and we need to assure that the files added to system file path. 
+
+```python
+import os
+import sys
+
+os.chdir(os.path.join(os.getcwd(),'Transformer-based-solutions-for-the-long-term-time-series-forecasting'))
+
+print(f'Your current dir: {os.getcwd()}')
+
+if not 'Transformer-based-solutions-for-the-long-term-time-series-forecasting' in sys.path:
+    sys.path += ['Transformer-based-solutions-for-the-long-term-time-series-forecasting']
+```
+> It's **crucial to run the training notebooks first and then the rest of the notebooks.** The training notebooks are typically computationally intensive and may generate models or other data needed for the subsequent notebooks. 
+
+> Remember to follow the sequence and dependencies outlined in each notebook to ensure a smooth execution of the project.
+
+---
+## Datasets Description
+See `./Datasets/Data_Description.md`
 
 ---
 ## Directories Description
-
 | Directory | Description |
 |---|---|
 | **Datasets** | This directory contains the datasets used in the project, 4 `ETDatasets` and `Bitcoin` dataset. |
@@ -125,6 +155,12 @@ To conclude our work, this notebook is made to visualize the results for all the
 
 ## Conclusion and Discussion
 
+- **DLinear** model is the best choice for the Benchmark and cryptocurrency datasets in both short and long-term forecasting.
+- **NLinear** is one of the best choices, it achieves lower forecasting errors for long and short-term forecasting.
+- **FEDformer** is considered as one of the best former-based models but it is more suitable in small horizons and short timestamps.
+- In comparison to all transformers and linear models, **Informer** has the least performance across all datasets.
+- **PatchTST** is the most suitable model to use in long-term forecasting, especially with small timestamps (e.g., 1min) datasets. 
+- Selecting a model for time series forecasting depends on the nature of the dataset and the prediction sequence Length.
 
 ---
 ## Citation
