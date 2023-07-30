@@ -78,14 +78,16 @@ Here are the prerequisites for getting a local copy up and running for the proje
 
 ```sh
     conda create -n <group3_env> python=3.9
-    Replace <group3_env> with the desired name for your environment.
 ```
+> Replace <group3_env> with the desired name for your environment.
+
 3. **Activate the Environment**
 
 ```sh
 conda activate <group3_env>
-Again, replace <group3_env> with the name of your environment.
 ```
+> Again, replace <group3_env> with the name of your environment.
+
 4. **Install Project Dependencies:** With the environment active, install the required libraries and dependencies for the project. This can be done using the following command:
 
 ```sh
