@@ -15,7 +15,7 @@ warnings.filterwarnings('ignore')
 class Dataset_ETT_hour(Dataset):
     def __init__(self, root_path, flag='train', size=None, 
                  features='S', data_path='ETTh1.csv', 
-                 target='OT', scale=True, inverse=False, timeenc=0, freq='h', cols=None):
+                 target='OT', scale=True, inverse=False, timeenc=0, freq='h', cols=None, train_len=0.1):
         # size [seq_len, label_len, pred_len]
         # info
         if size == None:
@@ -40,6 +40,7 @@ class Dataset_ETT_hour(Dataset):
         
         self.root_path = root_path
         self.data_path = data_path
+        self.train_len = train_len
         self.__read_data__()
 
     def __read_data__(self):
@@ -47,8 +48,9 @@ class Dataset_ETT_hour(Dataset):
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
 
-        border1s = [0, 12*30*24 - self.seq_len, 12*30*24+4*30*24 - self.seq_len]
-        border2s = [12*30*24, 12*30*24+4*30*24, 12*30*24+8*30*24]
+        df_raw_len = len(df_raw)
+        border1s = [0, int(df_raw_len * self.train_len) - self.seq_len, int(df_raw_len * self.train_len) - self.seq_len]
+        border2s = [int(df_raw_len * self.train_len), df_raw_len, df_raw_len]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
         
@@ -101,7 +103,7 @@ class Dataset_ETT_hour(Dataset):
 class Dataset_ETT_minute(Dataset):
     def __init__(self, root_path, flag='train', size=None, 
                  features='S', data_path='ETTm1.csv', 
-                 target='OT', scale=True, inverse=False, timeenc=0, freq='t', cols=None):
+                 target='OT', scale=True, inverse=False, timeenc=0, freq='t', cols=None, train_len=0.1):
         # size [seq_len, label_len, pred_len]
         # info
         if size == None:
@@ -126,6 +128,7 @@ class Dataset_ETT_minute(Dataset):
         
         self.root_path = root_path
         self.data_path = data_path
+        self.train_len = train_len
         self.__read_data__()
 
     def __read_data__(self):
@@ -133,8 +136,8 @@ class Dataset_ETT_minute(Dataset):
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
 
-        border1s = [0, 12*30*24*4 - self.seq_len, 12*30*24*4+4*30*24*4 - self.seq_len]
-        border2s = [12*30*24*4, 12*30*24*4+4*30*24*4, 12*30*24*4+8*30*24*4]
+        border1s = [0, int(df_raw_len * self.train_len) - self.seq_len, int(df_raw_len * self.train_len) - self.seq_len]
+        border2s = [int(df_raw_len * self.train_len), df_raw_len, df_raw_len]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
         
@@ -188,7 +191,7 @@ class Dataset_ETT_minute(Dataset):
 class Dataset_Custom(Dataset):
     def __init__(self, root_path, flag='train', size=None, 
                  features='S', data_path='ETTh1.csv', 
-                 target='OT', scale=True, inverse=False, timeenc=0, freq='h', cols=None):
+                 target='OT', scale=True, inverse=False, timeenc=0, freq='h', cols=None, train_len=0.1):
         # size [seq_len, label_len, pred_len]
         # info
         if size == None:
@@ -213,6 +216,7 @@ class Dataset_Custom(Dataset):
         self.cols=cols
         self.root_path = root_path
         self.data_path = data_path
+        self.train_len = train_len
         self.__read_data__()
 
     def __read_data__(self):
@@ -233,8 +237,8 @@ class Dataset_Custom(Dataset):
         num_train= int(len(df_raw)*0.7)
         num_test = int(len(df_raw)*0.2)
         num_vali = len(df_raw) - num_train - num_test
-        border1s = [0, num_train-self.seq_len, len(df_raw)-num_test-self.seq_len]
-        border2s = [num_train, num_train+num_vali, len(df_raw)]
+        border1s = [0, int(df_raw_len * self.train_len) - self.seq_len, int(df_raw_len * self.train_len) - self.seq_len]
+        border2s = [int(df_raw_len * self.train_len), df_raw_len, df_raw_len]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
         
