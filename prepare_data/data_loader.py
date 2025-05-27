@@ -135,7 +135,7 @@ class Dataset_ETT_minute(Dataset):
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
-
+        df_raw_len = len(df_raw)
         border1s = [0, int(df_raw_len * self.train_len) - self.seq_len, int(df_raw_len * self.train_len) - self.seq_len]
         border2s = [int(df_raw_len * self.train_len), df_raw_len, df_raw_len]
         border1 = border1s[self.set_type]
@@ -233,7 +233,7 @@ class Dataset_Custom(Dataset):
         else:
             cols = list(df_raw.columns); cols.remove(self.target); cols.remove('date')
         df_raw = df_raw[['date']+cols+[self.target]]
-
+        df_raw_len = len(df_raw)
         num_train= int(len(df_raw)*0.7)
         num_test = int(len(df_raw)*0.2)
         num_vali = len(df_raw) - num_train - num_test
