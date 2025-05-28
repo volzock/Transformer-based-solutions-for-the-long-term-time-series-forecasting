@@ -282,9 +282,8 @@ class Exp_Main(Exp_Basic):
 #                     gt = np.concatenate((input[0, :, -1], true[0, :, -1]), axis=0)
 #                     pd = np.concatenate((input[0, :, -1], pred[0, :, -1]), axis=0)
 #                     Visual(gt, pd, os.path.join(folder_path, str(i) + '.pdf'))
-        return preds
-        preds = np.array(preds)
-        trues = np.array(trues)
+        preds = np.array(preds[:-1])
+        trues = np.array(trues[:-1])
 #         print('test shape:', preds.shape, trues.shape)
 #         preds = preds.reshape(-1, preds.shape[-2], preds.shape[-1])
 #         trues = trues.reshape(-1, trues.shape[-2], trues.shape[-1])
