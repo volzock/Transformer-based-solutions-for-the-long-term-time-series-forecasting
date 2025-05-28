@@ -152,7 +152,6 @@ def MAPE(pred, true):
 def MSPE(pred, true):
     return np.mean(np.square((pred - true) / true))
 
-
 def SMAPE(y_pred, y_true, epsilon=1e-10):
     """
     Вычисляет SMAPE (Symmetric Mean Absolute Percentage Error) между истинными и предсказанными значениями.
@@ -195,9 +194,11 @@ def metric(pred, true):
     rmse = RMSE(pred, true)
     mape = MAPE(pred, true)
     mspe = MSPE(pred, true)
+    rse = RSE(pred, true)
+    corr = CORR(pred, true)
     smape = SMAPE(pred, true)
-    
-    return mae,mse,rmse,mape,mspe,smape
+
+    return mae, mse, rmse, mape, mspe, rse, corr, smape
 
 
 from typing import List
