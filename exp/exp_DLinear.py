@@ -1,4 +1,4 @@
-from models.DLinear import data_provider
+from prepare_data.data_factory import data_provider
 from models import DLinear
 from models.DLinear import EarlyStopping, adjust_learning_rate, test_params_flop,metric
 from utils.tools import Visual
